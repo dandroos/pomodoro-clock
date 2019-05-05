@@ -1,0 +1,5 @@
+export const INCREMENT_TIME = 'INCREMENT_TIME';
+export const DECREMENT_TIME = 'DECREMENT_TIME';
+export const START_TIMER = 'START_TIMER';
+export const PAUSE_TIMER = 'PAUSE_TIMER';
+export const RESET_TIMER = 'RESET_TIMER';
