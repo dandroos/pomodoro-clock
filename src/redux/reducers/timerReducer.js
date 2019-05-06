@@ -1,4 +1,4 @@
-import { INCREMENT_TIME, DECREMENT_TIME, START_TIMER, PAUSE_TIMER, RESET_TIMER } from '../actions/types';
+import { INCREMENT_TIME, DECREMENT_TIME } from '../actions/types';
 
 const initialState = {
     session_time: 25,
@@ -40,20 +40,7 @@ export default ((state=initialState, action)=>{
                 default:
                     return state;
             }
-        case START_TIMER:
-            return{
-                isRunning: true
-            }
-        case PAUSE_TIMER:
-            return{
-                isRunning: false
-            }
-        case RESET_TIMER:
-            return{
-                isRunning: false,
-                current_category: 'Session',
-                current_time: state.session_time
-            }
+        
         default:
             return state;
     }
