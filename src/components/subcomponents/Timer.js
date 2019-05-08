@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import { resetTimes } from '../../redux/actions/timerActions';
 import beep from '../../assets/audio/beep.mp3';
 
 class Timer extends Component {
@@ -9,18 +10,20 @@ class Timer extends Component {
       minutes : this.props.session_time,
       seconds : 0,
       current : 'Session',
-      is_running : false
+      is_running : false,
+      btn_text: 'Start'
     }
-    this.start = this.start.bind(this);
-    this.pause = this.pause.bind(this);
+    this.startStop = this.startStop.bind(this);
     this.reset = this.reset.bind(this);
-
+    
     this.interval = null;
   }
 
-  start(){
+  startStop(){
+    const audio = document.getElementById('beep');
     if(!this.state.is_running){
-      this.setState({ is_running: true })
+      document.getElementById('app').classList.add('go');
+      this.setState({ is_running: true, btn_text: 'Pause' })
       this.interval = setInterval(()=>{
         if(this.state.seconds > 0){
           this.setState({seconds: this.state.seconds - 1})
@@ -28,7 +31,7 @@ class Timer extends Component {
           if(this.state.minutes > 0){
             this.setState({ minutes: this.state.minutes - 1, seconds: 59 })
           }else{
-            var audio = new Audio(beep);
+            audio.currentTime = 0;
             audio.play();
             if(this.state.current === 'Session'){
               this.setState({
@@ -46,58 +49,63 @@ class Timer extends Component {
           }
         }
       }, 1000)
-    }
-  }
-
-  pause(){
-    if(this.state.is_running){
+    }else{
+      document.getElementById('app').classList.remove('go');
       window.clearInterval(this.interval);
       this.setState({
-        is_running: false
+        is_running: false,
+        btn_text: 'Start'
       });
-    }else{
-      this.start();
     }
+    document.activeElement.blur();
   }
 
   reset(){
+    document.getElementById('app').classList.remove('go');
     window.clearInterval(this.interval);
+    const audio = document.getElementById('beep');
+    audio.pause();
+    audio.currentTime = 0;
+    this.props.resetTimes()
     this.setState({
       is_running: false,
       minutes: this.props.session_time,
       seconds: 0,
-      current: 'Session'
+      current: 'Session',
+      btn_text: 'Start'
     });
+    document.activeElement.blur();
   }
-
-  alert
 
   componentDidUpdate(prevProps){
     if(!this.state.is_running){
-      if(this.props.session_time != prevProps.session_time){
+      if(this.props.session_time !== prevProps.session_time){
         this.setState({ minutes: this.props.session_time})
       }
     }
   }
 
   render() {
+    let minutes = this.state.minutes;
     var seconds = this.state.seconds;
     if(seconds < 10){
-      console.log('here')
       seconds = "0" + seconds.toString();
+    }
+
+    if(this.state.minutes < 10){
+      minutes = "0" + minutes.toString();
     }
     return (
       <div>
-        {/* <audio id="beep" src="../../assets/audio/beep.mp3" /> */}
-        <div>
-          <span>{this.state.current}</span>
-          <span>{this.state.minutes}:{seconds}</span>
+        <div id="timer">
+          <div id="timer-label">{this.state.current}</div>
+          <div id="time-left">{minutes}:{seconds}</div>
         </div>
         <div>
-          <button onClick={this.start}>Start</button>
-          <button onClick={this.pause}>Pause</button>
-          <button onClick={this.reset}>Reset</button>
+          <button className="btn btn-controls" id="start_stop" onClick={this.startStop}>{this.state.btn_text}</button>
+          <button className="btn btn-controls" id="reset" onClick={this.reset}>Reset</button>
         </div>
+        <audio id="beep"><source src={beep} /></audio>
       </div>
     )
   }
@@ -108,4 +116,4 @@ const mapStateToProps = state => ({
   break_time: state.timer.break_time
 })
 
-export default connect(mapStateToProps, null)(Timer);
+export default connect(mapStateToProps, { resetTimes })(Timer);

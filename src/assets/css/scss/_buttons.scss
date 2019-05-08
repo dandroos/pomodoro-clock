@@ -1,0 +1,42 @@
+.btn{
+    border-radius: 1rem;
+    padding: 0;
+    border: .15rem solid $white;
+    cursor: pointer;
+    transition: all .1s;
+
+    &-settings{
+        
+        width: 3rem;
+        font-size: 2rem;
+        background: none;
+        color: $white;
+    }
+
+    &-controls{
+        background: none;
+        font-size: 1.25rem;
+        letter-spacing: .1rem;
+        color: $white;
+        padding: 1rem;
+        text-transform: uppercase;
+
+        &:not(:last-of-type){
+            margin-right: 1rem;
+        }
+
+    }
+
+    &:hover, &:focus{
+        transform: translateY(-.2rem);
+        background: rgba($black, .1);
+    }
+
+    &:active{
+        background: rgba($black, .5);
+    }
+
+    &:focus{
+        outline: 0 !important;
+    }
+}

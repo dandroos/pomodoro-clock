@@ -1,0 +1,45 @@
+#app{
+    background: $stop;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .15s;
+}
+
+#app-content{
+    border: .5rem solid $white;
+    border-radius: 3rem;
+    padding: 3rem;
+    text-align: center;
+}
+
+#settings{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    grid-column-gap: 4rem;
+}
+
+.setting-controls{
+    display: grid;
+    grid-template-columns: .5fr 1fr .5fr;
+    grid-column-gap: .5rem;
+}
+
+.settings-display{
+    @include display();
+}
+
+#timer{
+    padding: 3rem;
+}
+
+#time-left{
+    @include display()
+}
+
+#footer{
+    margin-top: 1rem;
+    font-size: .75rem;
+}

@@ -19,23 +19,30 @@ class Settings extends Component {
       case 'decrement':
         this.props.decTime(category);
         break;
+      default:
+        break;
     }
+    document.activeElement.blur();
   }
 
   render() {
     return (
-      <div>
-        <div>
-          <h2>Session</h2>
-          <button category="work_time" action="decrement" onClick={this.handleClick}>-</button>
-          <span>{this.props.session_time}</span>
-          <button category="work_time" action="increment" onClick={this.handleClick}>+</button>
+      <div id="settings">
+        <div className="setting">
+          <h2 id="session-label">Session</h2>
+          <div className="setting-controls">
+            <button className="btn btn-settings" id="session-decrement" category="work_time" action="decrement" onClick={this.handleClick}>-</button>
+            <span className="settings-display" id="session-length">{this.props.session_time}</span>
+            <button className="btn btn-settings" id="session-increment" category="work_time" action="increment" onClick={this.handleClick}>+</button>
+          </div>
         </div>
-        <div>
-          <h2>Break</h2>
-          <button category="break_time" action="decrement" onClick={this.handleClick}>-</button>
-          <span>{this.props.break_time}</span>
-          <button category="break_time" action="increment" onClick={this.handleClick}>+</button>
+        <div className="setting">
+          <h2 id="break-label">Break</h2>
+          <div className="setting-controls">
+            <button className="btn btn-settings" id="break-decrement" category="break_time" action="decrement" onClick={this.handleClick}>-</button>
+            <span className="settings-display" id="break-length">{this.props.break_time}</span>
+            <button className="btn btn-settings" id="break-increment" category="break_time" action="increment" onClick={this.handleClick}>+</button>
+          </div>
         </div>
       </div>
     )

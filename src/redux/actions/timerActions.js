@@ -1,4 +1,4 @@
-import { INCREMENT_TIME, DECREMENT_TIME } from './types';
+import { INCREMENT_TIME, DECREMENT_TIME, RESET } from './types';
 
 export const incTime = (target) => dispatch =>{
     dispatch({
@@ -11,5 +11,11 @@ export const decTime = (target) => dispatch =>{
     dispatch({
         type: DECREMENT_TIME,
         target: target
+    })
+}
+
+export const resetTimes = () => dispatch =>{
+    dispatch({
+        type: RESET
     })
 }

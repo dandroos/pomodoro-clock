@@ -1,0 +1,20 @@
+
+@import './scss/variables';
+@import './scss/mixins';
+@import './scss/base';
+@import './scss/layout';
+@import './scss/typography';
+@import './scss/buttons';
+
+@import './scss/media';
+
+body{
+    font-family: $font;
+    color: $white;
+    cursor: default;
+}
+
+
+.go{
+    background: $go !important;
+}

@@ -1,0 +1,23 @@
+@media(max-width: 750px){
+    html{
+        font-size: 15px;
+    }
+}
+
+@media(max-width: 650px){
+
+    html{
+        font-size: 14px;
+    }
+    #settings{
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 600px){
+    #app-content{
+        // margin: 0 .6rem;
+        padding: 1rem;
+        border: none;
+    }
+}

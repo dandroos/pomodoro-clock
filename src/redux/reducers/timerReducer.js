@@ -1,4 +1,4 @@
-import { INCREMENT_TIME, DECREMENT_TIME } from '../actions/types';
+import { INCREMENT_TIME, DECREMENT_TIME, RESET } from '../actions/types';
 
 const initialState = {
     session_time: 25,
@@ -13,32 +13,53 @@ export default ((state=initialState, action)=>{
         case INCREMENT_TIME:
             switch(action.target){
                 case 'work_time':
-                    return{
-                        session_time: state.session_time + 1,
-                        break_time: state.break_time
+                    if(state.session_time < 60){
+                        return{
+                            session_time: state.session_time + 1,
+                            break_time: state.break_time
+                        }
+                    }else{
+                        return state;  
                     }
                 case 'break_time':
-                    return{
-                        break_time: state.break_time + 1,
-                        session_time: state.session_time
+                    if(state.break_time < 60){
+                        return{
+                            break_time: state.break_time + 1,
+                            session_time: state.session_time
+                        }
+                    }else{
+                        return state;
                     }
                 default:
-                    return state
+                    return state;
             }
         case DECREMENT_TIME:
             switch(action.target){
                 case 'work_time':
-                    return{
-                        session_time: state.session_time - 1,
-                        break_time: state.break_time
+                    if(state.session_time > 1){
+                        return{
+                            session_time: state.session_time - 1,
+                            break_time: state.break_time
+                        }
+                    }else{
+                        return state;
                     }
                 case 'break_time':
-                    return{
-                        break_time: state.break_time - 1,
-                        session_time: state.session_time
+                    if(state.break_time > 1){
+                        return{
+                            break_time: state.break_time - 1,
+                            session_time: state.session_time
+                        }
+                    }else{
+                        return state;
                     }
                 default:
                     return state;
+            }
+        case RESET:
+            return{
+                session_time: 25,
+                break_time: 5
             }
         
         default:
