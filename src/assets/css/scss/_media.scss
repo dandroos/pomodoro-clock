@@ -16,8 +16,11 @@
 
 @media(max-width: 600px){
     #app-content{
-        // margin: 0 .6rem;
         padding: 1rem;
         border: none;
+    }
+
+    #timer{
+        padding: 1.65rem;
     }
 }

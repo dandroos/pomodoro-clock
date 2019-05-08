@@ -115,7 +115,10 @@ h1, h2 {
 @media (max-width: 600px) {
   #app-content {
     padding: 1rem;
-    border: none; } }
+    border: none; }
+
+  #timer {
+    padding: 1.65rem; } }
 body {
   font-family: "Ubuntu";
   color: #ffe6f0;
